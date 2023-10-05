@@ -1,6 +1,6 @@
 # 这是一个示例 Python 脚本。
-import sqlite3
 import os
+import sqlite3
 import time
 
 flag = 0
@@ -13,6 +13,7 @@ conn = sqlite3.connect('/volume1/@cloudsync/session/2/event-db.sqlite')
 cur = conn.cursor()
 cur.execute('select max(id) from event_info')
 v_id = cur.fetchone()[0]
+os.system("echo '-1:" + str(time.time()) + " v_id is " + v_id + " '>> /volume1/run.log")
 cur.execute(
     'select id,local_mtime,mtime,local_file_size,file_size,timestamp,file_type from event_info where id =' + str(v_id))
 v_data = cur.fetchone()

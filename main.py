@@ -5,7 +5,7 @@ import time
 
 flag = 0
 
-local_conn = sqlite3.connect("status.sqlite")
+local_conn = sqlite3.connect("count.sqlite")
 local_cur = local_conn.cursor()
 local_cur.execute(
     'CREATE TABLE IF NOT EXISTS status(id INTEGER PRIMARY KEY,local_mtime INTEGER,local_file_size INTEGER,timestamp INTEGER,number INTEGER)')

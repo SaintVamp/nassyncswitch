@@ -10,7 +10,7 @@ local_cur = local_conn.cursor()
 local_cur.execute(
     'CREATE TABLE IF NOT EXISTS status(id INTEGER PRIMARY KEY,local_mtime INTEGER,local_file_size INTEGER,timestamp INTEGER,number INTEGER)')
 # conn = sqlite3.connect('/volume1/@cloudsync/session/2/event-db.sqlite')
-conn = sqlite3.connect('event-db.sqlite')
+conn = sqlite3.connect('/volume1/@cloudsync/session/2/event-db.sqlite')
 cur = conn.cursor()
 cur.execute('select max(id) from event_info')
 v_id = cur.fetchone()[0]

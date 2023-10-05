@@ -69,7 +69,8 @@ else:
                         op_sql = "update status set number = " + str(local_data[4] + 1)
                         local_cur.execute(op_sql)
                         local_conn.commit()
-                        os.system("echo '6:" + str(time.time()) + " write count '>> /volume1/run.log")
+                        os.system("echo '6:" + str(time.time()) + " "
+                                  + local_data[4] + " write count '>> /volume1/run.log")
                 else:
                     op_sql = ("update status set local_mtime = " + str(v_data[1]) + ",local_file_size = " +
                               str(v_data[3]) + ",timestamp = " + str(v_data[5]) + ",number = 0")

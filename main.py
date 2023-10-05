@@ -87,5 +87,5 @@ local_conn.close()
 conn.close()
 if flag == 1:
     os.system("echo '9:" + str(time.time()) + " close '>> /volume1/run.log")
-    os.system("sh /volume1/stop.sh")
+    os.system("sh /volume1/exec.sh")
     # 重启

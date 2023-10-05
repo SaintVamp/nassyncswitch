@@ -24,6 +24,7 @@ if local_data == None:
               str(v_data[3]) + "," + str(v_data[5]) + ",0)")
     local_cur.execute(op_sql)
     local_conn.commit()
+    os.system("echo '0:" + str(time.time()) + " init data '>> /volume1/run.log")
 else:
     if local_data[0] == v_data[0]:  # id是否相同
         if v_data[6] == 1:  # 同步的是否是目录
@@ -33,22 +34,24 @@ else:
                     op_sql = "delete from status "
                     local_cur.execute(op_sql)
                     local_conn.commit()
+                    os.system("echo '1:" + str(time.time()) + " count num is 2 '>> /volume1/run.log")
                     # 重启
                 else:
-                    os.system("echo '" + str(time.time()) + " write count '>> run.log")
                     op_sql = "update status set number = " + str(local_data[4] + 1)
                     local_cur.execute(op_sql)
                     local_conn.commit()
+                    os.system("echo '2:" + str(time.time()) + " write count '>> /volume1/run.log")
             else:
                 op_sql = ("update status set local_mtime = " + str(v_data[1]) + ",local_file_size = " +
                           str(v_data[3]) + ",timestamp = " + str(v_data[5]) + ",number = 0")
                 local_cur.execute(op_sql)
                 local_conn.commit()
+                os.system("echo '3:" + str(time.time()) + " update data '>> /volume1/run.log")
         else:
             if v_data[1] - v_data[2] != 0 or v_data[3] - v_data[4] != 0:
                 # 远端local_mtime,mtime,local_file_size,file_size是否已经一致
                 pass
-                os.system("echo '" + str(time.time()) + " no sync waiting '>> run.log")
+                os.system("echo '4:" + str(time.time()) + " no sync waiting '>> /volume1/run.log")
                 # 不一致，继续等待
             else:
                 if v_data[1] + v_data[5] == local_data[1] + local_data[3]:  # 判断local_mtime+timestamp是否一致
@@ -57,25 +60,28 @@ else:
                         op_sql = "delete from status "
                         local_cur.execute(op_sql)
                         local_conn.commit()
+                        os.system("echo '5:" + str(time.time()) + " count num is 2 '>> /volume1/run.log")
                         # 重启
                     else:
                         op_sql = "update status set number = " + str(local_data[4] + 1)
-                        os.system("echo '" + str(time.time()) + " write count '>> run.log")
                         local_cur.execute(op_sql)
                         local_conn.commit()
+                        os.system("echo '6:" + str(time.time()) + " write count '>> /volume1/run.log")
                 else:
                     op_sql = ("update status set local_mtime = " + str(v_data[1]) + ",local_file_size = " +
                               str(v_data[3]) + ",timestamp = " + str(v_data[5]) + ",number = 0")
                     local_cur.execute(op_sql)
                     local_conn.commit()
+                    os.system("echo '7:" + str(time.time()) + " update data '>> /volume1/run.log")
     else:
         op_sql = ("update status set local_mtime = " + str(v_data[1]) + ",local_file_size = " +
                   str(v_data[3]) + ",timestamp = " + str(v_data[5]) + ",number = 0")
         local_cur.execute(op_sql)
         local_conn.commit()
+        os.system("echo '8:" + str(time.time()) + " update data '>> /volume1/run.log")
 local_conn.close()
 conn.close()
 if flag == 1:
-    os.system("echo '" + str(time.time()) + " close '>> run.log")
+    os.system("echo '9:" + str(time.time()) + " close '>> /volume1/run.log")
     os.system("sh /volume1/stop.sh")
     # 重启

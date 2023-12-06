@@ -78,8 +78,8 @@ else:
                     local_conn.commit()
                     os.system("echo '7:" + str(time.time()) + " update data '>> /volume1/run.log")
     else:
-        op_sql = ("update status set local_mtime = " + str(v_data[1]) + ",local_file_size = " +
-                  str(v_data[3]) + ",timestamp = " + str(v_data[5]) + ",number = 0")
+        op_sql = ("update status set local_mtime = " + str(v_data[1]) + ",local_file_size = " + str(v_data[3]) + ",id = " +
+                  str(v_data[0]) + ",timestamp = " + str(v_data[5]) + ",number = 0")
         local_cur.execute(op_sql)
         local_conn.commit()
         os.system("echo '8:" + str(time.time()) + " update data '>> /volume1/run.log")

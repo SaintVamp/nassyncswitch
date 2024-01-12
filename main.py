@@ -92,7 +92,11 @@ else:
         os.system("echo '8:" + str(get_time()) + " update data '>> /volume1/run.log")
 local_conn.close()
 conn.close()
-if flag == 1:
+os.system("sh /volume1/speed.sh")
+with open('/volume1/rs', 'r', encoding='utf-8') as f:
+    data = int(f.readline())
+    os.system("echo '9-1:speed_rs is " + str(data) + "'>> /volume1/run.log")
+if flag == 1 and data == 1:
     os.system("echo '9:" + str(get_time()) + " close '>> /volume1/run.log")
     os.system("sh /volume1/exec.sh")
     # 重启

@@ -1,5 +1,5 @@
 hostname=an
-if [ $hostname -eq "NAS2" ]; then
+if [ "$hostname" = "NAS2" ]; then
 
 fi
 

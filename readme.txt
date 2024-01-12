@@ -1,0 +1,1 @@
+curl -o /volume1/init-nas_sync.sh https://gitee.com/saintvamp/nassyncswitch/raw/master/init-nas_sync.sh
